@@ -11,6 +11,8 @@ function App() {
     <Route exact path="/" element={<Home/>} >
     <Route index element={<AllTasks/>}>
     <Route path="/importantTasks" element={<ImportantTasks/>} />
+  <Route path="/completedTasks" element={<CompletedTasks/>} />
+  <Route path="/incompleteTasks" element={<IncompleteTasks/>} />
     </Route>
     
     </Routes>
