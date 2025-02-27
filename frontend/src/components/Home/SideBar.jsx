@@ -7,17 +7,22 @@ import { TbNotebookOff } from "react-icons/tb";
 const SideBar = () => {
     const data = [
         {title:"All Task",
-        icon: <CgNotes />
+        icon: <CgNotes />,
+         link:"/",
+         
 
         },
         {title:"Important Task",
-            icon: <MdLabelImportant/>
+            icon: <MdLabelImportant/>,
+         link:"/importantTasks",
         },
         {title:"completed Task",
-            icon: <FaCheckDouble/>
+            icon: <FaCheckDouble/>,
+         link:"/completedTasks",
         },
         {title:"Incomplete Task",
-            icon: <TbNotebookOff />
+            icon: <TbNotebookOff />,
+         link:"/incompleteTasks",
         },
     ]
   return (
@@ -29,7 +34,7 @@ const SideBar = () => {
         </div>
         <div >
             {data.map((items,index)=>(
-                <div className='my-2 flex items-center hover:bg-gray-600 rounded transition-all'>{items.icon}&nbsp;{items.title}</div>
+                <Link to={items.link} key={index} className='my-2 flex items-center hover:bg-gray-600 rounded transition-all'>{items.icon}&nbsp;{items.title}</Link>
             ))}
         </div>
         <div className='bg-gray-600 w-full p-2 rounded'>
