@@ -3,6 +3,7 @@ import { CgNotes } from "react-icons/cg";
 import { MdLabelImportant } from "react-icons/md"
 import { FaCheckDouble } from "react-icons/fa6"
 import { TbNotebookOff } from "react-icons/tb";
+import { Link } from 'react-router-dom';
 
 const SideBar = () => {
     const data = [

@@ -23,7 +23,7 @@ const Cards = () =>{
 
   return (
     <div className="flex flex-col justify-between grid grid-cols-3 gap-4 p-4">
-      {data && data.map((items,index)=>
+      {Data && Data.map((items,index)=>
       <div className="bg-gray-800 rounded p-4">
         <div>
         <h3 className="text-xl font-semibold" >{items.title}</h3>
