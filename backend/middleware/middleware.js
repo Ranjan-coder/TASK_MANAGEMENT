@@ -9,11 +9,11 @@ if (!authorizationHeader) {
 }
 
 // this token contain with bearer 
-    console.log('token:',authorizationHeader);
+    // console.log('token:',authorizationHeader);
 
     // to remove the bearer token 
     const jwtToken = authorizationHeader.split(' ')[1]
-    console.log(jwtToken);
+    // console.log(jwtToken);
 
     if(jwtToken){
     jwt.verify(jwtToken,secretkey,(err,validate)=>{
