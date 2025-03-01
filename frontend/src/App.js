@@ -27,7 +27,7 @@ function App() {
       navigate('/login')
     }
 
-  },[])
+  })
   
   
   return (
@@ -37,8 +37,7 @@ function App() {
           <Route exact path="/" element={<Home />}>
           <Route index element={<AllTasks />}/>
               <Route path="/importantTasks" element={<ImportantTasks />} />
-              <Route path="/import { Dispatch } from './../node_modules/redux/src/types/store';
-completedTasks" element={<CompletedTasks />} />
+              <Route path="/completedTasks" element={<CompletedTasks />} />
               <Route path="/incompleteTasks" element={<IncompletedTasks/>} />
             </Route>
             <Route path="/signup" element={<Signup/>}/>

@@ -3,51 +3,79 @@ import { CiHeart } from "react-icons/ci";
 import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { IoAddCircle } from "react-icons/io5";
+import axios from "axios";
+import { FaHeart } from "react-icons/fa";
 
 
 
+const Cards = ({ home,setInputdiv,Data, setUpdatedData }) => {
 
 
-const Cards = ({ home,setInputdiv }) => {
-  // const [ImportantButton, setImportantButton] = useState("Incomplete")
+  const headers = {
+    id:localStorage.getItem('id'),
+    authorization:`Bearer ${localStorage.getItem('token')}`
+}
 
-  const Data = [
-    {
-      title: "The best coading chanel",
-      desc: "i have to create my chanel",
-      status: "In Complete",
-    },
-    {
-      title: "Cpp concept",
-      desc: "i have to create my chanel",
-      status: "Complete",
-    },
-    {
-      title: "Assignment",
-      desc: "i have to create my chanel",
-      status: "In Complete",
-    },
-    {
-      title: "Projects",
-      desc: "i have to create my chanel",
-      status: "In Complete",
-    },
-  ];
+  const handleCompletedTask = async (id)=>{
+    try {
+      await axios.put(`http://localhost:5055/api/task/completemarked/${id}`,{},
+        {headers}
+      )
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  const handleImportant = async (id)=>{
+    try {
+      await axios.put(`http://localhost:5055/api/task/importantmarked/${id}`,{},
+        {headers}
+      )
+    } catch (error) {
+      console.error(error)
+    }
+
+  }
+
+  const handleEdit = async (id,title,desc)=>{
+    try {
+      setInputdiv('fixed')
+      setUpdatedData({id: id, title: title , desc: desc })
+    } catch (error) {
+      console.error(error)
+    }
+
+  }
+
+  const handleDelete = async (id)=>{
+    try {
+      await axios.delete(`http://localhost:5055/api/task/delete/${id}`,
+        {headers}
+      )
+    } catch (error) {
+      console.error(error)
+    }
+
+  }
 
   return (
-    <div className="flex flex-col justify-between grid grid-cols-3 gap-4 p-4">
+    <div className="grid grid-cols-3 gap-4 p-4">
       {Data && Data.map((items, index) => (
-        <div className="bg-gray-800 rounded p-4">
+        <div className=" flex flex-col justify-between bg-gray-800 rounded p-4">
           <div>
             <h3 className="text-xl font-semibold" >{items.title}</h3>
             <p className="text-gray-300 my-2">{items.desc}</p>
           </div>
-          <div className="mt-2 w-full flex items-center">
-            <button className={` ${items.status === "In Complete" ? "bg-red-400" : "bg-green-400"}  p-2 rounded`}>{items.status}</button>
-            <div className="text-white p-2 w-3/6 text-2xl flex justify-around">
-              <button><CiHeart /></button>
-              <button><FaEdit /></button>
-              <button><MdDelete /></button>
+          <div className="mt-4 w-full flex items-center">
+            <button onClick={()=>handleCompletedTask(items._id)} className={` ${items.complete === false ? "bg-red-400" : "bg-green-400"}  p-2 rounded`}>
+              {items.complete === true ? "Completed" : "In Completed"}
+              </button>
+            <div className="text-white p-2 w-3/6 text-2xl font-semibold flex justify-around">
+              <button onClick={()=>handleImportant(items._id)} > { items.important === false ? <CiHeart /> : <FaHeart className="text-red-500"/>}</button>
+              {home !== "false" &&
+               <button onClick={()=>handleEdit(items._id,items.title,items.desc)}><FaEdit /></button>
+                }
+              <button onClick={()=>handleDelete(items._id)}><MdDelete /></button>
             </div>
           </div>
         </div>))}
